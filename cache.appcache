@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Badr multi-host build 4ebf1216ac381726
+# Badr multi-host build 45da0ffac8fbf14e
 
 CACHE:
 # sha256 8d7ec6b585bc7a3a33ccb43060e77d0960c53ea383df29cdfd1f56c73e779df0
@@ -172,7 +172,7 @@ js/activation.js
 js/app.js
 # sha256 374af6bbda229ca6a2e2576cbdf28ba1feaa5a77ff156f3635ae93685dfa1610
 js/firmware-detector.js
-# sha256 17b0229bc2cabeab8e27552092bf4b123088ea4303d26b149feb8ee548b33b8a
+# sha256 143e442b2cfe6cfddd8cf97e7dca35d5021b885053f06a6cbf8ac0674dfede70
 js/firmware-router.js
 # sha256 fea3eba34a6247f9cc5276bbf1eb2c0105ab2b79bc406af1cbf2a05ec9143515
 js/firmware-safety.js
@@ -194,7 +194,7 @@ flash2/core.js?v=10
 flash2/jb.js?v=19
 # sha256 98a92edf565578c1eb5c2880a72d6a1ea2117ef4f31f13ec219e1970ab2fa40f
 flash2/jb.html?retry=0
-# sha256 0cf68bb75caffc68e6276f55c6a04a664c3e1d262bb063e009e4587a7c70df00
+# sha256 2149a6cf66cf2f0ee54cedaf303d17c31e2b1615a2a6bda18af1dc513fb6a983
 js/version.js
 
 NETWORK:

@@ -8,7 +8,7 @@ Phone and computer visitors are redirected to `shop.html`. PlayStation 4 visitor
 
 Free deployment plan: keep this source repository private and publish only the generated runtime files to a PUBLIC `badrha9i9i/badrha9i9i.github.io` repository. The repository is owned by the owner-created GitHub Free organization. The public distribution necessarily includes client-side JavaScript, assets and PS4 runtime files; it does not hide shipped code or the local activation PIN. Development JSX, tests, tool scripts and source history stay in this private repository. GitHub Pages then uses the distribution `main` branch at `/`. Keep `.nojekyll` and byte-preserving `.gitattributes`. After runtime edits, regenerate `python tools/manifest.py`, repackage using `python tools/package_public.py`, then publish the runtime archive to the organization Pages repository. Validate with `python tests/http_audit.py https://badrha9i9i.github.io/`.
 
-On PS4, bookmark the exact published URL, activate online and wait for cache completion. Power off, disconnect the internet, restart and reopen that same bookmark to validate real offline use. PC tests do not establish PS4 hardware compatibility. Raw13G remains blocked as documented below.
+On PS4, bookmark the exact published URL, activate online and wait for cache completion. Power off, disconnect the internet, restart and reopen that same bookmark to validate real offline use. PC tests do not establish PS4 hardware compatibility. Raw13G 13.52 is now enabled experimentally; other Raw13G versions remain blocked.
 
 Build the storefront with `npm ci` then `npm run build:shop`, followed by `python tools/manifest.py`. React and modern libraries are loaded only by shop.html; PS4 root visitors use the existing ES5 entry flow.
 
@@ -20,7 +20,7 @@ For a local preview: `python tools/serve.py 8765`.
 
 ## النسخة الحالية: Multi-host v2.1 — Firmware Safety Verification
 
-واجهة فعلية للتفعيل وتأكيد Firmware والكاش، مع محركين معزولين. **Raw13G محفوظ ومتكامل في الهيكلة والكاش، لكن تشغيل إصداراته محجوب حالياً بسبب تناقضات توافق Payload في المصدر.** هذه ليست نسخة مقبولة على Hardware بعد؛ لم يتوفر PS4 ولم يتم نشر رابط عمومي.
+واجهة فعلية للتفعيل وتأكيد Firmware والكاش، مع محركين معزولين. **Raw13G مفعّل تجريبياً لإصدار 13.52؛ باقي إصداراته محجوبة حتى يتأكد توافقها.** الموقع منشور، ولكن نجاح تشغيل الـPayload على جهاز الزبون يحتاج تجربة فعلية.
 
 ## Architecture
 
@@ -50,7 +50,7 @@ tools/serve.py               Local static server with manifest MIME
 tests/                      Unit, browser and original-source audits
 ```
 
-Both hosts retain their own offsets, JS, workers, patch blobs and payloads. Original runtime JavaScript is byte-identical. Host HTML landing/run pages were replaced with guarded delivery wrappers preserving `state`, `out`, and Raw13G `msg` nodes. RawGame4 still selects Lapse/Poops from the confirmed, detected firmware. Raw13G's original `off.payload` selection remains untouched but is not launched while its compatibility rows are blocked.
+Both hosts retain their own offsets, JS, workers, patch blobs and payloads. Original runtime JavaScript is byte-identical. Host HTML landing/run pages were replaced with guarded delivery wrappers preserving `state`, `out`, and Raw13G `msg` nodes. RawGame4 still selects Lapse/Poops from the confirmed, detected firmware. Raw13G's original `off.payload` selection remains untouched. Its 13.52 row is enabled experimentally.
 
 Every active HTML page refers to the **same root manifest** (`../cache.appcache` inside hosts). This avoids claiming readiness from one group while another host group is incomplete. Both hosts are cached, approximately 2.16 MB of explicitly listed resources including URL aliases. Their original child manifests remain preserved byte-identically as source artifacts, but no active page uses them. This intentionally favors reliability over downloading only the selected host.
 
@@ -66,10 +66,10 @@ The main `/` and `/index.html`, host directory URLs, run pages, versioned import
 | 12.52 | RawGame4 / Poops | Experimental alias; explicit first-time confirmation |
 | 13.02, 13.04 | Raw13G / 663 chain | Experimental, execution unavailable: payload support unresolved |
 | 13.50 | Raw13G / 663 chain | Experimental, execution unavailable: patch and payload unverified |
-| 13.52 | Raw13G / 663 chain | Experimental, execution unavailable: contradictory payload mapping and documented panics |
+| 13.52 | Raw13G / 663 chain | Experimental, enabled: upstream 13.52 engine and patch; bundled payload requires console validation |
 | All other versions | None | Blocked |
 
-See **COMPATIBILITY.md** for source evidence and binary hashes. A row/offset being present does not establish payload compatibility. Raw13G has no README at the pinned commit. Do not turn `launchAllowed` on merely to make the UI continue.
+See **COMPATIBILITY.md** for source evidence, independent hardware reports and binary hashes. Raw13G has no README at the pinned commit. The enabled 13.52 route uses its original files and may still fail on a real console.
 
 ## First activation in the store
 
@@ -97,7 +97,7 @@ The small Owner settings link shows detected/confirmed firmware, host, activatio
 
 Reset clears local activation and debug, not the cache. Reinstall / verify requests `applicationCache.update()`; the API has no selective delete/reinstall method. The page explains that a genuinely damaged cache requires clearing browser website data, reconnecting and reactivating. It never claims that pressing this button erased and rebuilt the cache.
 
-Debug exposes the original RawGame4 log without modifying the engine or forwarding unsafe query parameters. It cannot override compatibility. Raw13G remains blocked in debug too. The original Raw13G logger emits full logs only with its own `log=1` option; we do not claim that a blocked engine has run or emitted logs.
+Debug exposes the original RawGame4 log without modifying the engine or forwarding unsafe query parameters. It cannot override compatibility. Raw13G 13.52 follows the same enabled route in debug; its other rows remain blocked. The original Raw13G logger emits full logs only with its own `log=1` option.
 
 ## Deployment
 

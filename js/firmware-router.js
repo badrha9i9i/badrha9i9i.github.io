@@ -12,7 +12,7 @@
  row('13.02','flash2','jb','1302.bin','payload2.bin','Experimental — unavailable',false,'Kernel/patch evidence exists, but shipped GoldHEN-labelled binary contradicts PS4-HEN payload comments. Payload firmware compatibility unverified.');
  row('13.04','flash2','jb','1302.bin','payload2.bin','Experimental — unavailable',false,'Kernel alias of 13.02. Shipped payload identity and firmware support remain unverified.');
  row('13.50','flash2','jb','1350.bin','payload2.bin','Experimental — unavailable',false,'Patch marked UNTESTED on hardware; shipped GoldHEN-labelled payload contradicts PS4-HEN comments.');
- row('13.52','flash2','jb','1352.bin','goldhen.bin','Experimental — unavailable',false,'Source reports patched GoldHEN kernel panics (2/2), while selecting goldhen.bin. Binary equals payload2.bin. No verified compatible payload.');
+ row('13.52','flash2','jb','1352.bin','goldhen.bin','Experimental — enabled',true,'Raw13G supplies the 13.52 kernel table and patch; independent hardware reports confirm this exploit path. The bundled payload is upstream-selected, but this exact binary has not been tested on this console. A failed attempt may freeze or restart the PS4.');
  w.BadrRouter={map:map,get:function(fw){return Object.prototype.hasOwnProperty.call(map,fw)?map[fw]:null;},check:function(fw,detection){
   var item=this.get(fw);
   if(!item)return {ok:false,reason:'Unsupported firmware. No route is enabled.'};
